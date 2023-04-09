@@ -30,7 +30,9 @@
       `java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar artifacts/aqa-shop.jar`
     - PostgreSQL:
       `java -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -jar artifacts/aqa-shop.jar`
+      
 После исполнения команды в терминале появится сообщение: `2023-04-02 00:48:31.253  INFO 63900 --- [main] ru.netology.shop.ShopApplication: Started ShopApplication in 4.816 seconds (JVM running for 5.292)`
+
 4. Запускаем авто-тесты
     - MySQL: `gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app`
     - PostgreSQL: `gradlew clean test -Ddb.url=jdbc:postgresql://localhost:5432/app`
