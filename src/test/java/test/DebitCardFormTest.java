@@ -1,7 +1,7 @@
 package test;
 
-import Pages.MainPage;
-import Pages.PaymentPage;
+import pages.MainPage;
+import pages.PaymentPage;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.SQLHelper;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -13,10 +13,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selenide.open;
 import static data.DataHelper.*;
 
-public class CardFormTest {
-    MainPage mainPage = new MainPage();
-    PaymentPage paymentPage = new PaymentPage();
-
+public class DebitCardFormTest {
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
@@ -24,8 +21,9 @@ public class CardFormTest {
 
     @BeforeEach
     void setUp() {
+        MainPage mainPage = new MainPage();
         open("http://localhost:8080");
-        mainPage.payWithCreditCard();
+        mainPage.payWithDebitCard();
     }
 
     @AfterAll
@@ -37,6 +35,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitCardWithEmptyNumber() {
         var info = getEmptyCardNumberCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.shouldFillMessage();
     }
@@ -44,6 +44,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitCardWith15DigitsNumber() {
         var info = getInvalidCardNumberWith15SymbolsCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongFormatMessage();
     }
@@ -51,6 +53,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitAnotherBankCard() {
         var info = getAnotherBankCardNumberCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.failMessage();
     }
@@ -58,6 +62,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitEmptyMonth() {
         var info = getEmptyMonthCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.shouldFillMessage();
     }
@@ -65,6 +71,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitMonthIsZero() {
         var info = getInvalidFormatMonthZeroZeroCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongTermMessage();
     }
@@ -72,6 +80,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitMonthOneDigit() {
         var info = getInvalidFormatMonthOneDigitCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongFormatMessage();
     }
@@ -79,6 +89,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitMonthIncorrect() {
         var info = getInvalidFormatMonthIrrelevantCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongTermMessage();
     }
@@ -86,6 +98,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitEmptyYear() {
         var info = getEmptyYearCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.shouldFillMessage();
     }
@@ -93,6 +107,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitEarlyYear() {
         var info = getEarlyYearCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.cardExpiredMessage();
     }
@@ -100,6 +116,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitFutureYear() {
         var info = getFutureYearCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongTermMessage();
     }
@@ -107,6 +125,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitEmptyOwner() {
         var info = getEmptyOwnerCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.shouldFillMessage();
     }
@@ -114,6 +134,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitOneWordOwner() {
         var info = getInvalidOwnerWithOneNameCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongFormatMessage();
     }
@@ -121,6 +143,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitThreeWordsOwner() {
         var info = getInvalidOwnerWithThreeWordsCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongFormatMessage();
     }
@@ -128,6 +152,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitLowerCaseOwner() {
         var info = getInvalidOwnerWithLowerCaseCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongFormatMessage();
     }
@@ -135,6 +161,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitUpperCaseOwner() {
         var info = getInvalidOwnerWithUpperCaseCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongFormatMessage();
     }
@@ -142,6 +170,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitRuOwner() {
         var info = getInvalidOwnerWithCyrillicCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongFormatMessage();
     }
@@ -149,6 +179,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitOwnerWithNumbers() {
         var info = getInvalidOwnerWithDigitsCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongFormatMessage();
     }
@@ -156,6 +188,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitOwnerWithSymbols() {
         var info = getInvalidOwnerWithSymbolsCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongFormatMessage();
     }
@@ -163,6 +197,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitCVVIsEmpty() {
         var info = getEmptyCVVCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.shouldFillMessage();
     }
@@ -170,6 +206,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitCVVOneNumber() {
         var info = getInvalidCVVWithOneDigitCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongFormatMessage();
     }
@@ -177,6 +215,8 @@ public class CardFormTest {
     @Test
     void shouldNotSubmitCVVTwoNumbers() {
         var info = getInvalidCVVWithTwoDigitsCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.wrongFormatMessage();
     }

@@ -1,7 +1,7 @@
 package test;
 
-import Pages.MainPage;
-import Pages.PaymentPage;
+import pages.MainPage;
+import pages.PaymentPage;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.SQLHelper;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -13,11 +13,10 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selenide.open;
 import static data.DataHelper.getValidApprovedCardInfo;
 import static data.DataHelper.getValidDeclinedCardInfo;
+import static data.SQLHelper.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CreditCardTest {
-    MainPage mainPage = new MainPage();
-    PaymentPage paymentPage = new PaymentPage();
-
+public class PaymentWithDebitCardTest {
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
@@ -25,8 +24,9 @@ public class CreditCardTest {
 
     @BeforeEach
     void setUp() {
+        MainPage mainPage = new MainPage();
         open("http://localhost:8080");
-        mainPage.payWithCreditCard();
+        mainPage.payWithDebitCard();
     }
 
     @AfterAll
@@ -38,14 +38,28 @@ public class CreditCardTest {
     @Test
     public void shouldSubmitApprovedCard() {
         var info = getValidApprovedCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.successMessage();
+
+        var paymentId = getOrderId();
+        String actStatus = getStatusForPaymentWithDebitCard(paymentId);
+        String expStatus = "APPROVED";
+        assertEquals(expStatus, actStatus);
     }
 
     @Test
     void shouldNotSubmitDeclinedCard() {
         var info = getValidDeclinedCardInfo();
+
+        PaymentPage paymentPage = new PaymentPage();
         paymentPage.fillForm(info);
         paymentPage.failMessage();
+
+        var paymentId = getOrderId();
+        String actStatus = getStatusForPaymentWithDebitCard(paymentId);
+        String expStatus = "DECLINED";
+        assertEquals(expStatus, actStatus);
     }
 }

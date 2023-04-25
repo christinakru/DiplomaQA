@@ -36,6 +36,7 @@ dependencies {
     testImplementation 'mysql:mysql-connector-java:8.0.18'
     testImplementation 'io.rest-assured:rest-assured:4.3.0'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
+    implementation 'org.postgresql:postgresql:42.2.23'
 }
 
 test {
