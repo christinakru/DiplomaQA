@@ -13,9 +13,9 @@
 Приложение в собственной СУБД должно сохранять информацию о том, успешно ли был совершён платёж и каким способом. Данные карт при этом сохранять не допускается.
 
 ## Документация
-- [План автоматизации тестирования]()
-- [Отчет по итогам тестирования]()
-- [Отчет по итогам автоматизации]()
+- [План автоматизации тестирования](https://github.com/christinakru/DiplomaQA/blob/master/Plan.md)
+- [Отчет по итогам тестирования](https://github.com/christinakru/DiplomaQA/blob/master/Report.md)
+- [Отчет по итогам автоматизации](https://github.com/christinakru/DiplomaQA/blob/master/Summary.md)
 
 ## Инструкция
 *Предварительные требования:*
@@ -23,14 +23,16 @@
 - Docker desktop / docker toolbox
 
 ### Запуск проекта:
-1. Клонировать репозиторий, используя команду `git clone `
+1. Клонировать репозиторий, используя команду `git clone https://github.com/christinakru/DiplomaQA`
 2. Запускаем docker-контейнер с СУБД MySQL и PostgreSQL, а также Node.js: `docker-compose up`
 3. Запускаем SUT:
     - MySQL:
       `java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar artifacts/aqa-shop.jar`
     - PostgreSQL:
       `java -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -jar artifacts/aqa-shop.jar`
-После исполнения команды в терминале появится сообщение: `2023-04-02 00:48:31.253  INFO 63900 --- [           main] ru.netology.shop.ShopApplication         : Started ShopApplication in 4.816 seconds (JVM running for 5.292)`
+      
+После исполнения команды в терминале появится сообщение: `2023-04-02 00:48:31.253  INFO 63900 --- [main] ru.netology.shop.ShopApplication: Started ShopApplication in 4.816 seconds (JVM running for 5.292)`
+
 4. Запускаем авто-тесты
     - MySQL: `gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app`
     - PostgreSQL: `gradlew clean test -Ddb.url=jdbc:postgresql://localhost:5432/app`
