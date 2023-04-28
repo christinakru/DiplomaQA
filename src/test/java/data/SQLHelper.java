@@ -53,7 +53,7 @@ public class SQLHelper {
     }
 
     public static String getPaymentAmount(String paymentId) {
-        String amountSQL = String.format("SELECT amount FROM payment_entity WHERE transaction_id=\"%s\";", paymentId);
+        String amountSQL = String.format("SELECT amount FROM payment_entity WHERE transaction_id='%s';", paymentId);
         String amount = "";
         try (var conn = getConnection();
              var statusStmt = conn.prepareStatement(amountSQL)) {
@@ -69,7 +69,7 @@ public class SQLHelper {
     }
 
     public static String getStatusForPaymentWithDebitCard(String paymentId) {
-        String statusSQL = String.format("SELECT status FROM payment_entity WHERE transaction_id=\"%s\";", paymentId);
+        String statusSQL = String.format("SELECT status FROM payment_entity WHERE transaction_id='%s';", paymentId);
         String status = "";
         try (var conn = getConnection();
              var statusStmt = conn.prepareStatement(statusSQL)) {
@@ -85,7 +85,7 @@ public class SQLHelper {
     }
 
     public static String getStatusForPaymentWithCreditCard(String paymentId) {
-        String statusSQL = String.format("SELECT status FROM credit_request_entity WHERE bank_id=\"%s\";", paymentId);
+        String statusSQL = String.format("SELECT status FROM credit_request_entity WHERE bank_id='%s';", paymentId);
         String status = "";
         try (var conn = getConnection();
              var statusStmt = conn.prepareStatement(statusSQL)) {

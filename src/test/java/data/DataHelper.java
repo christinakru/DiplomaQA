@@ -127,7 +127,7 @@ public class DataHelper {
         String month = getMonthTwoDigits(futureDate);
         String year = getYearTwoDigits(futureDate);
 
-        return new CardInformation(approvedCardNumber, month, year, getRandomCardOwner(), getRandomCvvCode());
+        return new CardInformation(approvedCardNumber, month, year, getRandomCardOwner().toLowerCase(), getRandomCvvCode());
     }
 
     public static CardInformation getInvalidOwnerWithUpperCaseCardInfo() {
@@ -135,7 +135,7 @@ public class DataHelper {
         String month = getMonthTwoDigits(futureDate);
         String year = getYearTwoDigits(futureDate);
 
-        return new CardInformation(approvedCardNumber, month, year, getRandomCardOwner(), getRandomCvvCode());
+        return new CardInformation(approvedCardNumber, month, year, getRandomCardOwner().toUpperCase(), getRandomCvvCode());
     }
 
     public static CardInformation getInvalidOwnerWithCyrillicCardInfo() {

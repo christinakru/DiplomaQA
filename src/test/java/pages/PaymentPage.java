@@ -6,6 +6,8 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import data.CardInformation;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -37,30 +39,30 @@ public class PaymentPage {
     }
 
     public void successMessage() {
-        successNotification.waitUntil(Condition.visible, 15000);
+        successNotification.shouldBe(Condition.visible, Duration.ofSeconds(10));
     }
 
     public void failMessage() {
-        failNotification.waitUntil(Condition.visible, 15000);
+        failNotification.shouldBe(Condition.visible, Duration.ofSeconds(10));
     }
 
     public void wrongFormatMessage() {
-        wrongFormat.waitUntil(Condition.visible, 15000);
+        wrongFormat.shouldBe(Condition.visible, Duration.ofSeconds(10));
     }
 
     public void wrongTermMessage() {
-        wrongTerm.waitUntil(Condition.visible, 15000);
+        wrongTerm.shouldBe(Condition.visible, Duration.ofSeconds(10));
     }
 
     public void cardExpiredMessage() {
-        cardExpired.waitUntil(Condition.visible, 15000);
+        cardExpired.shouldBe(Condition.visible, Duration.ofSeconds(10));
     }
 
     public void shouldFillMessage() {
-        fieldRequired.waitUntil(Condition.visible, 15000);
+        fieldRequired.shouldBe(Condition.visible, Duration.ofSeconds(10));
     }
 
     public void shouldNotify() {
-        notification.waitUntil(Condition.visible, 15000);
+        notification.shouldBe(Condition.visible, Duration.ofSeconds(10));
     }
 }
